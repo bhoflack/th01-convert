@@ -101,19 +101,10 @@ public class MPDConvertor extends AbstractConvertor implements Convertor {
 				numbers.append(i % 10);
 			}
 			VelocityContext context = new VelocityContext();
-			context.put("device", getTh01Wafermap().getDeviceId());
-			context.put("lotname", getTh01Wafermap().getLotId());
-			context.put("waferid", getTh01Wafermap().getWaferId());
-			context.put("testdate", String.format("%1$tY-%1$tm-%1$td", getTh01Wafermap().getDate()));
 			context.put("flat", FLAT.get(getTh01Wafermap().getFlat()));
-			context.put("columns", getTh01Wafermap().getNumberOfColumns());
-			context.put("rows", getTh01Wafermap().getNumberOfRows());
 			context.put("passchar", getPassSymbol());
 			context.put("failchar", getFailSymbol());
 			context.put("skipchar", getNoneSymbol());
-			context.put("tested", getTh01Wafermap().getTotalCnt());
-			context.put("passed", getTh01Wafermap().getPassCnt());
-			context.put("failed", getTh01Wafermap().getFailCnt());
 			context.put("topnumbers", ten.toString());
 			context.put("numbers", numbers);
 			return context;

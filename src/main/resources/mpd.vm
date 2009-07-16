@@ -1,18 +1,19 @@
-Product-ID:     $device
-Lot number:     $lotname
-Wafer number:   $waferid
+#set testdate $date.format("%1$tY-%1$tm-%1$td",$info.date)
+Product-ID:     ${info.deviceId}
+Lot number:     ${info.lotId}
+Wafer number:   ${info.waferId}
 Test date:      $testdate
 Flat angle:     $flat
-Columns:        $columns
-Rows:           $rows
+Columns:        ${info.numberOfColumns}
+Rows:           ${info.numberOfRows}
 
 Pass bin code:  $passchar
 Fail bin code:  $failchar
 Skip die:       $skipchar
 
-Tested dies:    $tested
-Passed dies:    $passed
-Failed dies:    $failed
+Tested dies:    ${info.totalCnt}
+Passed dies:    ${info.passCnt}
+Failed dies:    ${info.failCnt}
 
      $topnumbers
      $numbers

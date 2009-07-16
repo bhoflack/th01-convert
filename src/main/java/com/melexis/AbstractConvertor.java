@@ -4,19 +4,13 @@
  */
 package com.melexis;
 
-import com.melexis.th01.TH01Die;
 import com.melexis.th01.TH01WaferMap;
 import com.melexis.th01.exception.Th01Exception;
 import java.io.StringWriter;
-import java.util.Arrays;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
-import org.apache.velocity.exception.ParseErrorException;
-import org.apache.velocity.exception.ResourceNotFoundException;
 
 /**
  *
@@ -33,7 +27,9 @@ public abstract class AbstractConvertor {
 	}
 
 	protected String convertWafermap() throws Th01Exception, InvalidWafermapException, InvalidRefdieException {
-		return internalWafermap.convert(getPassSymbol(), getFailSymbol(), getNoneSymbol(), getRefdieSymbol());
+		// rotate 180 degrees
+		InternalWafermap i = internalWafermap.rotate90Degrees().rotate90Degrees();
+		return i.convert(getPassSymbol(), getFailSymbol(), getNoneSymbol(), getRefdieSymbol());
 	}
 	
 
@@ -51,9 +47,9 @@ public abstract class AbstractConvertor {
 		sw.flush();
 		return sw.toString().getBytes();
 	}
-
-	protected char dieresult(short bincode) throws Th01Exception {
-		return getTh01Wafermap().isPassCat((int) bincode) ? getPassSymbol() : getFailSymbol();
+	
+	protected void rotate90Degrees() {
+		internalWafermap.rotate90Degrees();
 	}
 
 	protected abstract char getRefdieSymbol();
@@ -64,7 +60,12 @@ public abstract class AbstractConvertor {
 
 	protected abstract char getFailSymbol();
 
-	protected abstract VelocityContext getContext() throws Th01Exception;
+	protected VelocityContext getContext() throws Th01Exception {
+		VelocityContext ctx = new VelocityContext();
+		ctx.put("info", th01Wafermap);
+
+		return ctx;
+	}
 
 	protected abstract String getTemplate();
 
@@ -75,17 +76,13 @@ public abstract class AbstractConvertor {
 		}
 		AbstractConvertor o = (AbstractConvertor) other;
 
-		return Arrays.equals(wafermap, o.wafermap) &&
-			getTh01Wafermap().equals(o.getTh01Wafermap()) &&
-			Arrays.equals(refdies, o.refdies);
+		return internalWafermap != null && internalWafermap.equals(o.internalWafermap);
 	}
 
 	@Override
 	public int hashCode() {
 		int hash = 7;
 		hash = 59 * hash + (this.getTh01Wafermap() != null ? this.getTh01Wafermap().hashCode() : 0);
-		hash = 59 * hash + (this.wafermap != null ? this.wafermap.hashCode() : 0);
-		hash = 59 * hash + (this.refdies != null ? this.refdies.hashCode() : 0);
 		return hash;
 	}
 

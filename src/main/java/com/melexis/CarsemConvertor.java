@@ -48,11 +48,6 @@ public class CarsemConvertor extends AbstractConvertor implements Convertor {
 		VelocityContext context = new VelocityContext();
 		context.put("waferid", waferid);
 		context.put("orientation", 6);
-		context.put("maxX", getTh01Wafermap().getNumberOfColumns());
-		context.put("maxY", getTh01Wafermap().getNumberOfRows());
-		context.put("dies", getTh01Wafermap().getNeff());
-		context.put("tested", getTh01Wafermap().getTotalCnt());
-		context.put("passed", getTh01Wafermap().getPassCnt());
 
 		return context;
 	}
