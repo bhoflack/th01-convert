@@ -45,7 +45,7 @@ public class CarsemConvertor extends AbstractConvertor implements Convertor {
 
 	@Override
 	protected VelocityContext getContext() throws Th01Exception {
-		VelocityContext context = new VelocityContext();
+		VelocityContext context = super.getContext();
 		context.put("waferid", waferid);
 		context.put("orientation", 6);
 
