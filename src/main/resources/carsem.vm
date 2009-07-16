@@ -1,0 +1,9 @@
+WaferId: $waferid
+Orient: $orientation
+MaxXY: $maxX $maxY
+TotDie: $dies
+Tested: $tested
+Pickable: $passed
+
+
+$wafermap

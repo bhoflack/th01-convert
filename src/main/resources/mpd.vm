@@ -1,0 +1,21 @@
+Product-ID:     $device
+Lot number:     $lotname
+Wafer number:   $waferid
+Test date:      $testdate
+Flat angle:     $flat
+Columns:        $columns
+Rows:           $rows
+
+Pass bin code:  $passchar
+Fail bin code:  $failchar
+Skip die:       $skipchar
+
+Tested dies:    $tested
+Passed dies:    $passed
+Failed dies:    $failed
+
+     $topnumbers
+     $numbers
+
+MAP
+$wafermap

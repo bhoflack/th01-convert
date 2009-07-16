@@ -1,0 +1,61 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.melexis</groupId>
+    <artifactId>th01-convert</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0</version>
+    <name>th01-convert</name>
+    <url>http://maven.apache.org</url>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>com.melexis</groupId>
+            <artifactId>libth01-java</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.melexis</groupId>
+            <artifactId>semichecksum</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <name>Internal Releases</name>
+            <url>http://nexus.colo.elex.be:8081/nexus/content/repositories/releases</url>
+        </repository>
+	  <!-- use the following if you ARE using a snapshot version. -->
+        <snapshotRepository>
+            <id>nexus</id>
+            <name>Internal Snapshots</name>
+            <url>http://nexus.colo.elex.be:8081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>
