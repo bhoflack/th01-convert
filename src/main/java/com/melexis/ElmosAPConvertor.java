@@ -83,4 +83,10 @@ public class ElmosAPConvertor extends AbstractConvertor implements Convertor {
 	protected String getTemplate() {
 		return "elmos.vm";
 	}
+
+	@Override
+	public int hashCode() {
+		int hash = 3;
+		return hash;
+	}
 }

@@ -1,4 +1,3 @@
-#set testdate $date.format("%1$tY-%1$tm-%1$td",$info.date)
 Product-ID:     ${info.deviceId}
 Lot number:     ${info.lotId}
 Wafer number:   ${info.waferId}

@@ -15,7 +15,7 @@ import java.util.Arrays;
  */
 public class InternalWafermap {
 
-	enum DIE {
+	protected enum DIE {
 
 		NONE,
 		PASS,

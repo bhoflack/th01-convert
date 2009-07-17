@@ -91,23 +91,28 @@ public class MPDConvertor extends AbstractConvertor implements Convertor {
 	 *      $numbers
 	 */
 	protected VelocityContext getContext() throws Th01Exception {
-
-		StringBuffer ten = new StringBuffer();
-		for (int i = 0; i < getTh01Wafermap().getNumberOfColumns() / 10; i++) {
-			ten.append(String.format("%10d", i + 1));
+		try {
+			StringBuffer ten = new StringBuffer();
+			for (int i = 0; i < getTh01Wafermap().getNumberOfColumns() / 10; i++) {
+				ten.append(String.format("%10d", i + 1));
+			}
+			StringBuffer numbers = new StringBuffer();
+			for (int i = 1; i <= getTh01Wafermap().getNumberOfColumns(); i++) {
+				numbers.append(i % 10);
+			}
+			VelocityContext context = super.getContext();
+			context.put("flat", FLAT.get(getTh01Wafermap().getFlat()));
+			context.put("testdate", String.format("%1$tY-%1$tm-%1$td", getTh01Wafermap().getDate()));
+			context.put("passchar", getPassSymbol());
+			context.put("failchar", getFailSymbol());
+			context.put("skipchar", getNoneSymbol());
+			context.put("topnumbers", ten.toString());
+			context.put("numbers", numbers);
+			return context;
+		} catch (ParseException ex) {
+			Logger.getLogger(MPDConvertor.class.getName()).log(Level.SEVERE, null, ex);
+			throw new Th01Exception(ex);
 		}
-		StringBuffer numbers = new StringBuffer();
-		for (int i = 1; i <= getTh01Wafermap().getNumberOfColumns(); i++) {
-			numbers.append(i % 10);
-		}
-		VelocityContext context = super.getContext();
-		context.put("flat", FLAT.get(getTh01Wafermap().getFlat()));
-		context.put("passchar", getPassSymbol());
-		context.put("failchar", getFailSymbol());
-		context.put("skipchar", getNoneSymbol());
-		context.put("topnumbers", ten.toString());
-		context.put("numbers", numbers);
-		return context;
 
 	}
 

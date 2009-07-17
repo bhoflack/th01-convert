@@ -37,8 +37,8 @@ public class MPDConvertorTest extends AbstractTestUtils {
 	public void testConvert() throws IOException, Th01Exception, InvalidRefdieException, InvalidWafermapException, Exception {
 		String converted = new String(mpdc.convert());
 
-		System.out.println(converted);
 		assertEquals(new String(readFileFromResource("mpd.example")), converted);
+		
 	}
 
 }

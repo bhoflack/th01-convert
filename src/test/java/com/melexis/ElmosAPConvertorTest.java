@@ -29,7 +29,7 @@ public class ElmosAPConvertorTest extends AbstractTestUtils {
 	public void testConvert() throws IOException, Th01Exception, InvalidRefdieException, InvalidWafermapException, Exception {
 		ElmosAPConvertor elmosAPConvertor = new ElmosAPConvertor.Builder(wafermap).build();
 		byte[] map = elmosAPConvertor.convert();
-		assertArrayEquals(readFileFromResource("elmos.example"), map);
+		assertEquals(new String(readFileFromResource("elmos.example")), new String(map));
 	}
 
 
@@ -40,21 +40,21 @@ public class ElmosAPConvertorTest extends AbstractTestUtils {
 	@Test
 	public void testRefdies() throws Th01Exception, InvalidRefdieException, InvalidWafermapException, Exception {
 		// Create the refdies
-		Die[] refdies = new Die[] {new Die.Builder(12, -72).build(),
-						new Die.Builder(4, -46).build()};
+		Die[] refdies = new Die[] {new Die.Builder(-10, -72).build(),
+						new Die.Builder(-46, -10).build()};
 
 		// Create the convertor
 		ElmosAPConvertor elmosAPConvertor = new ElmosAPConvertor.Builder(wafermap).setRefdies(refdies).build();
 		String w = new String(elmosAPConvertor.convert());
-
+		toFile(elmosAPConvertor.convert());
 		// Assert that the converted wafermaps contains refdies
 		assertTrue(w.contains("T"));
 
 		String[] lines = w.split("\n");
 
 		// Assert that the refdies have been added at the correct location
-		assertEquals('T', lines[46].charAt(52));
-		assertEquals('T', lines[72].charAt(44));
+		assertEquals('T', lines[10].charAt(46));
+		assertEquals('T', lines[72].charAt(10));
 	}
 
 	/**
