@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.melexis;
 
 import com.melexis.th01.TH01Die;
@@ -14,11 +13,13 @@ import com.melexis.th01.exception.Th01Exception;
  * @author brh
  */
 public class Die {
+
 	private final int x;
 	private final int y;
 	private final TH01WaferMap th01Wafermap;
 
 	public static class Builder {
+
 		private final int x;
 		private final int y;
 		private TH01WaferMap th01Wafermap;
@@ -60,13 +61,29 @@ public class Die {
 	 * @throws com.melexis.th01.exception.Th01Exception
 	 * @throws AssertionError method was called without th01wafermap
 	 */
+	public Die toInternalRefdie() throws Th01Exception {
+		if (th01Wafermap == null) {
+			throw new AssertionError("Can not convert a die to internal without the wafermap filled in!");
+		}
+		int ix = th01Wafermap.getNumberOfColumns() + x - 1;
+		int iy = th01Wafermap.getNumberOfRows() + y - 1;
+
+		return new Builder(ix, iy).setTh01Wafermap(th01Wafermap).build();
+	}
+
+	/**
+	 * Convert the die to the internal coordinates
+	 * @return a die with the internal coordinates
+	 * @throws com.melexis.th01.exception.Th01Exception
+	 * @throws AssertionError method was called without th01wafermap
+	 */
 	public Die toInternal() throws Th01Exception {
 		if (th01Wafermap == null) {
 			throw new AssertionError("Can not convert a die to internal without the wafermap filled in!");
 		}
 		int ix = th01Wafermap.getMaxX() - this.x;
 		int iy = this.y - th01Wafermap.getMinY();
-		return new Builder(ix,iy).setTh01Wafermap(th01Wafermap).build();
+		return new Builder(ix, iy).setTh01Wafermap(th01Wafermap).build();
 	}
 
 	@Override
@@ -89,7 +106,7 @@ public class Die {
 
 	@Override
 	public String toString() {
-		return String.format("[%d,%d]",getX(), getY());
+		return String.format("[%d,%d]", getX(), getY());
 	}
 
 	/**
@@ -105,5 +122,4 @@ public class Die {
 	public int getY() {
 		return y;
 	}
-
 }

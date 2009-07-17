@@ -53,9 +53,10 @@ public class InternalWafermap {
 		for (Die refdie : refdies) {
 			Die r = null;
 			try {
-				r = new Die.Builder(refdie).setTh01Wafermap(th01Wafermap).build().toInternal();
+				r = new Die.Builder(refdie).setTh01Wafermap(th01Wafermap).build().toInternalRefdie();
 				wafermap[r.getY()][r.getX()] = DIE.REFDIE;
 			} catch (ArrayIndexOutOfBoundsException e) {
+				System.out.println(String.format("Wafermap boundaries x: %s %s y: %s %s", th01Wafermap.getMinX(), th01Wafermap.getMaxX(), th01Wafermap.getMinY(), th01Wafermap.getMaxY()));
 				throw new InvalidRefdieException(String.format("The coordinates of refdie %s are outside the wafermap.  Please correct!", refdie));
 			}
 		}

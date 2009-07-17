@@ -41,13 +41,12 @@ public class CarsemConvertorTest extends AbstractTestUtils {
 
 			TH01WaferMap t = new TH01WaferMap(readFileFromResource(thmap));
 			Die[] refdies = EXAMPLES.get(example);
-			CarsemConvertor carsemConvertor = new CarsemConvertor(t, new Die[] {}, example);
+			CarsemConvertor carsemConvertor = new CarsemConvertor(t, refdies, example);
 			
 			toFile(carsemConvertor.convert());
 
 			System.out.println(new String(carsemConvertor.convert()));
 			assertEquals(new String(readFileFromResource(output)), new String(carsemConvertor.convert()));
-
 		}
 	}
 	
