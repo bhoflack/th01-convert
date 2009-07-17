@@ -5,6 +5,8 @@
 
 package com.melexis;
 
+import com.melexis.semichecksum.Checksum;
+import com.melexis.semichecksum.ChecksumException;
 import com.melexis.th01.TH01WaferMap;
 import com.melexis.th01.exception.Th01Exception;
 import java.io.IOException;
@@ -26,7 +28,7 @@ public class CarsemConvertorTest extends AbstractTestUtils {
 				new Die.Builder(-7, -28).build(),
 				new Die.Builder(-33, -7).build()
 			});
-			put("T26655X1-01-F5", new Die[] {
+			put("T26655-01-F5", new Die[] {
 				new Die.Builder(-18, -17).build(),
 				new Die.Builder(-19, -20).build()
 			});
@@ -49,5 +51,6 @@ public class CarsemConvertorTest extends AbstractTestUtils {
 			assertEquals(new String(readFileFromResource(output)), new String(carsemConvertor.convert()));
 		}
 	}
+
 	
 }
