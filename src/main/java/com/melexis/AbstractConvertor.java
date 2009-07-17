@@ -63,6 +63,7 @@ public abstract class AbstractConvertor {
 	protected VelocityContext getContext() throws Th01Exception {
 		VelocityContext ctx = new VelocityContext();
 		ctx.put("info", th01Wafermap);
+		ctx.put("int", this);
 
 		return ctx;
 	}
@@ -96,5 +97,17 @@ public abstract class AbstractConvertor {
 	 */
 	public TH01WaferMap getTh01Wafermap() {
 		return th01Wafermap;
+	}
+
+	public Integer getTotalDies() {
+		return internalWafermap.getTotalDies();
+	}
+
+	public Integer getTestedDies() {
+		return internalWafermap.getTestedDies();
+	}
+	
+	public Integer getPassedDies() {
+		return internalWafermap.getPassedDies();
 	}
 }

@@ -44,4 +44,16 @@ public class InternalWafermapTest {
 		
 		assertEquals("FRR\nPPN", w.convert('P', 'F', 'N', 'R').trim());
 	}
+
+	public void testGetTotalDies() {
+		assertEquals(5, internal.getTotalDies());
+	}
+
+	public void testGetTestedDies() {
+		assertEquals(3, internal.getTestedDies());
+	}
+
+	public void testGetPassedDies() {
+		assertEquals(2, internal.getPassedDies());
+	}
 }

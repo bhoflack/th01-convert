@@ -8,6 +8,8 @@ import com.melexis.th01.TH01Die;
 import com.melexis.th01.TH01WaferMap;
 import com.melexis.th01.exception.Th01Exception;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -103,6 +105,36 @@ public class InternalWafermap {
 			b.append(l).append('\n');
 		}
 		return b.toString();
+	}
+
+	private Map<DIE, Integer> diecategories() {
+		Map<DIE,Integer> map = new HashMap<DIE,Integer>();
+		map.put(DIE.NONE, 0);
+		map.put(DIE.PASS, 0);
+		map.put(DIE.FAIL, 0);
+		map.put(DIE.REFDIE, 0);
+
+		for (DIE[] line : wafermap) {
+			for (DIE d : line) {
+				map.put(d, map.get(d) + 1);
+			}
+		}
+		return map;
+	}
+
+	public Integer getTotalDies() {
+		Map<DIE, Integer> dies = diecategories();
+		return dies.get(DIE.REFDIE) + dies.get(DIE.PASS) + dies.get(DIE.FAIL);
+	}
+
+	public Integer getTestedDies() {
+		Map<DIE, Integer> dies = diecategories();
+		return dies.get(DIE.PASS) + dies.get(DIE.FAIL);
+	}
+
+	public Integer getPassedDies() {
+		Map<DIE, Integer> dies = diecategories();
+		return dies.get(DIE.PASS);
 	}
 
 	@Override
