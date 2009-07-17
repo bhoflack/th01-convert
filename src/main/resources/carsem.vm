@@ -1,8 +1,8 @@
 WaferId: $waferid
 Orient: $orientation
 MaxXY: ${info.numberOfColumns} ${info.numberOfRows}
-TotDie: ${info.neff}
-Tested: ${info.totalCnt}
+TotDie: ${info.dies.size()}
+Tested: ${tested}
 Pickable: ${info.passCnt}
 
 

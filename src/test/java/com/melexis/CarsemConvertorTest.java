@@ -46,9 +46,9 @@ public class CarsemConvertorTest extends AbstractTestUtils {
 			toFile(carsemConvertor.convert());
 
 			System.out.println(new String(carsemConvertor.convert()));
-			assertArrayEquals(readFileFromResource(output), carsemConvertor.convert());
+			assertEquals(new String(readFileFromResource(output)), new String(carsemConvertor.convert()));
 
 		}
 	}
-
+	
 }

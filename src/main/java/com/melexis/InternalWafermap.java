@@ -29,7 +29,7 @@ public class InternalWafermap {
 		initMap(th01Wafermap, refdies);
 	}
 
-	private InternalWafermap(DIE[][] wafermap) {
+	protected InternalWafermap(DIE[][] wafermap) {
 		this.wafermap = wafermap;
 	}
 
@@ -70,7 +70,7 @@ public class InternalWafermap {
 
 		for (int y=0; y<wafermap.length; y++) {
 			for (int x=0; x<wafermap[y].length; x++) {
-				w[x][y] = wafermap[y][x];
+				w[x][wafermap.length - (y +1)] = wafermap[y][x];
 			}
 		}
 
@@ -111,7 +111,7 @@ public class InternalWafermap {
 		}
 		
 		InternalWafermap o = (InternalWafermap) other;
-		return wafermap != null && wafermap != o.wafermap;
+		return wafermap != null && wafermap.equals(o.wafermap);
 	}
 
 	@Override

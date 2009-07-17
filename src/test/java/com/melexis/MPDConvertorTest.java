@@ -7,9 +7,6 @@ package com.melexis;
 
 import com.melexis.th01.TH01WaferMap;
 import com.melexis.th01.exception.Th01Exception;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;

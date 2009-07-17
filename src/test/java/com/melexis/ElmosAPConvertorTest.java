@@ -32,21 +32,6 @@ public class ElmosAPConvertorTest extends AbstractTestUtils {
 		assertArrayEquals(readFileFromResource("elmos.example"), map);
 	}
 
-	/**
-	 * Test that the correct spec is returned for a die
-	 * pass = 1
-	 * fail = F
-	 * @throws com.melexis.th01.exception.Th01Exception
-	 */
-	@Test
-	public void testDieresult() throws Th01Exception, Exception {
-		ElmosAPConvertor elmosAPConvertor = new ElmosAPConvertor.Builder(wafermap).build();
-		assertEquals('1', elmosAPConvertor.dieresult((short) 1));
-
-		for (short i = 2; i<=15; i++) {
-			assertEquals('F', elmosAPConvertor.dieresult(i));
-		}
-	}
 
 	/**
 	 * Test that we can add refdies to the wafermap.

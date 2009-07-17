@@ -5,9 +5,9 @@
 
 package com.melexis;
 
+import com.melexis.th01.TH01Die;
 import com.melexis.th01.TH01WaferMap;
 import com.melexis.th01.exception.Th01Exception;
-import java.util.Properties;
 import org.apache.velocity.VelocityContext;
 
 /**
@@ -18,7 +18,8 @@ public class CarsemConvertor extends AbstractConvertor implements Convertor {
 
 	private final String waferid;
 
-	public CarsemConvertor(TH01WaferMap th01Wafermap, Die[] refdies, String waferid) throws Th01Exception, Exception {
+	public CarsemConvertor(TH01WaferMap th01Wafermap, Die[] refdies, String waferid)
+		throws Th01Exception, Exception {
 		super(th01Wafermap, refdies);
 		this.waferid = waferid;
 	}
@@ -46,15 +47,29 @@ public class CarsemConvertor extends AbstractConvertor implements Convertor {
 	@Override
 	protected VelocityContext getContext() throws Th01Exception {
 		VelocityContext context = super.getContext();
-		context.put("waferid", waferid);
-		context.put("orientation", 6);
 
+		context.put("tested", testedDies());
+		context.put("orientation", 6);
+		context.put("waferid", waferid);
+		
 		return context;
 	}
 	
 	@Override
 	protected String getTemplate() {
 		return "carsem.vm";
+	}
+
+	private int testedDies() {
+		int untested = 0;
+
+		for (TH01Die d : getTh01Wafermap().getDies()) {
+			if (d.getBincode() == 14) {
+				untested++;
+			}
+		}
+
+		return getTh01Wafermap().getDies().size() - untested;
 	}
 
 }
