@@ -38,12 +38,6 @@
             <artifactId>velocity</artifactId>
             <version>1.6.2</version>
         </dependency>
-        <dependency>
-            <groupId>com.melexis</groupId>
-            <artifactId>semichecksum</artifactId>
-            <version>1.0</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <distributionManagement>

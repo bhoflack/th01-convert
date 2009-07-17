@@ -5,8 +5,6 @@
 
 package com.melexis;
 
-import com.melexis.semichecksum.Checksum;
-import com.melexis.semichecksum.ChecksumException;
 import com.melexis.th01.TH01WaferMap;
 import com.melexis.th01.exception.Th01Exception;
 import java.io.IOException;
