@@ -5,7 +5,7 @@
     <groupId>com.melexis</groupId>
     <artifactId>th01-convert</artifactId>
     <packaging>jar</packaging>
-    <version>1.0</version>
+    <version>1.1</version>
     <name>th01-convert</name>
     <url>http://maven.apache.org</url>
     <build>
@@ -37,6 +37,21 @@
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity</artifactId>
             <version>1.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.fitnesse</groupId>
+            <artifactId>fitlibrary</artifactId>
+            <version>20080812</version>
+        </dependency>
+        <dependency>
+            <groupId>org.fitnesse</groupId>
+            <artifactId>fitnesse</artifactId>
+            <version>20081201</version>
+        </dependency>
+        <dependency>
+            <groupId>logkit</groupId>
+            <artifactId>logkit</artifactId>
+            <version>2.0</version>
         </dependency>
     </dependencies>
 

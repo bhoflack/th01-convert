@@ -46,14 +46,14 @@ public class InternalWafermapTest {
 	}
 
 	public void testGetTotalDies() {
-		assertEquals(5, internal.getTotalDies());
+		assertEquals(new Integer(5), internal.getTotalDies());
 	}
 
 	public void testGetTestedDies() {
-		assertEquals(3, internal.getTestedDies());
+		assertEquals(new Integer(3), internal.getTestedDies());
 	}
 
 	public void testGetPassedDies() {
-		assertEquals(2, internal.getPassedDies());
+		assertEquals(new Integer(2), internal.getPassedDies());
 	}
 }

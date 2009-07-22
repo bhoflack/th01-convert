@@ -134,8 +134,6 @@ public class CarsemConvertorTest extends AbstractTestUtils {
 	@Test
 	public void testConvert() throws IOException, Th01Exception, InvalidRefdieException, InvalidWafermapException, Exception {
 		for (String example : EXAMPLES.keySet()) {
-			System.out.println(example);
-
 			String thmap = String.format("carsem_%s.th01", example);
 			String output = String.format("carsem_%s.example", example);
 
@@ -143,9 +141,7 @@ public class CarsemConvertorTest extends AbstractTestUtils {
 			Die[] refdies = EXAMPLES.get(example);
 			CarsemConvertor carsemConvertor = new CarsemConvertor(t, refdies, example);
 
-			toFile(carsemConvertor.convert());
-
-			System.out.println(new String(carsemConvertor.convert()));
+			
 			assertEquals(new String(readFileFromResource(output)), new String(carsemConvertor.convert()));
 		}
 	}
