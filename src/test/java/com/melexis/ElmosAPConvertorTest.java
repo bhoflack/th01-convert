@@ -71,12 +71,4 @@ public class ElmosAPConvertorTest extends AbstractTestUtils {
 		ElmosAPConvertor elmosAPConvertor = new ElmosAPConvertor.Builder(wafermap).setRefdies(refdies).build();
 		elmosAPConvertor.convert();
 	}
-
-	@Test(expected=InvalidWafermapException.class)
-	public void testWafermapDiesOutsideWafermap() throws Th01Exception, IOException, InvalidRefdieException, InvalidWafermapException, Exception {
-		wafermap = new InvalidTh01Wafermap(readFileFromResource("WC_A95518_20_07052008_011117.th01"));
-		ElmosAPConvertor elmosAPConvertor = new ElmosAPConvertor.Builder(wafermap).build();
-		
-		elmosAPConvertor.convert();
-	}
 }

@@ -30,6 +30,7 @@ public class CarsemConvertorTest extends AbstractTestUtils {
 					new Die.Builder(-18, -17).build(),
 					new Die.Builder(-19, -20).build()
 				});
+            put("A99394-25-A0", new Die[]{});
 			put("B79929-25-F1", new Die[]{new Die.Builder(-7, -28).build(), new Die.Builder(-33, -7).build()});
 			put("B79929-24-C6", new Die[]{new Die.Builder(-7, -28).build(), new Die.Builder(-33, -7).build()});
 			put("B79929-23-A3", new Die[]{new Die.Builder(-7, -28).build(), new Die.Builder(-33, -7).build()});

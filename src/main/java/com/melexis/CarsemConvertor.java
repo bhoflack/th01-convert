@@ -48,8 +48,15 @@ public class CarsemConvertor extends AbstractConvertor implements Convertor {
 	protected VelocityContext getContext() throws Th01Exception {
 		VelocityContext context = super.getContext();
 
-		context.put("tested", testedDies());
-		context.put("orientation", 6);
+        int orient;
+        if (super.th01Wafermap.getFlat().equals('O')) {
+            orient = 3;
+        } else {
+            orient = 6;
+        }
+
+        context.put("tested", testedDies());
+		context.put("orientation", orient);
 		context.put("waferid", waferid);
 		
 		return context;

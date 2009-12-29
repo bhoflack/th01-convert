@@ -8,9 +8,13 @@ import com.melexis.th01.TH01WaferMap;
 import com.melexis.th01.exception.Th01Exception;
 import java.io.StringWriter;
 import java.util.Properties;
+import java.util.logging.Logger;
+import org.apache.log4j.BasicConfigurator;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
+import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.runtime.RuntimeConstants;
 
 /**
  *
@@ -18,8 +22,8 @@ import org.apache.velocity.app.Velocity;
  */
 public abstract class AbstractConvertor {
 
-	private final TH01WaferMap th01Wafermap;
-	private final InternalWafermap internalWafermap;
+	public final TH01WaferMap th01Wafermap;
+	public final InternalWafermap internalWafermap;
 
 	public AbstractConvertor(TH01WaferMap th01Wafermap, Die[] refdies) throws Th01Exception, InvalidWafermapException, InvalidRefdieException {
 		this.th01Wafermap = th01Wafermap;
@@ -31,23 +35,39 @@ public abstract class AbstractConvertor {
 		InternalWafermap i = internalWafermap.rotate90Degrees().rotate90Degrees();
 		return i.convert(getPassSymbol(), getFailSymbol(), getNoneSymbol(), getRefdieSymbol());
 	}
-	
 
 	public byte[] convert() throws Exception {
-		Properties p = new Properties();
-		p.setProperty("resource.loader", "classpath");
-		p.setProperty("classpath.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
-		Velocity.init(p);
+		BasicConfigurator.configure();
+		Logger log = Logger.getLogger("AbstractConvertor");
+		log.info("Log4jLoggerExample: ready to start velocity");
+
+		/*
+		 *  now create a new VelocityEngine instance, and
+		 *  configure it to use the category
+		 */
+
+		VelocityEngine ve = new VelocityEngine();
+
+		ve.setProperty(RuntimeConstants.RUNTIME_LOG_LOGSYSTEM_CLASS,
+			"org.apache.velocity.runtime.log.Log4JLogChute");
+
+		ve.setProperty("runtime.log.logsystem.log4j.logger",
+			"AbstractConvertor");
+		ve.setProperty("resource.loader", "classpath");
+		ve.setProperty("classpath.resource.loader.class",
+			"org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+
+		ve.init();
 		VelocityContext context = getContext();
 		context.put("wafermap", convertWafermap());
 		Template t = null;
-		t = Velocity.getTemplate(getTemplate());
+		t = ve.getTemplate(getTemplate());
 		StringWriter sw = new StringWriter();
 		t.merge(context, sw);
 		sw.flush();
 		return sw.toString().getBytes();
 	}
-	
+
 	protected void rotate90Degrees() {
 		internalWafermap.rotate90Degrees();
 	}
@@ -64,6 +84,8 @@ public abstract class AbstractConvertor {
 		VelocityContext ctx = new VelocityContext();
 		ctx.put("info", th01Wafermap);
 		ctx.put("int", this);
+        ctx.put("rows", internalWafermap.rows);
+        ctx.put("cols", internalWafermap.cols);
 
 		return ctx;
 	}
@@ -106,7 +128,7 @@ public abstract class AbstractConvertor {
 	public Integer getTestedDies() {
 		return internalWafermap.getTestedDies();
 	}
-	
+
 	public Integer getPassedDies() {
 		return internalWafermap.getPassedDies();
 	}

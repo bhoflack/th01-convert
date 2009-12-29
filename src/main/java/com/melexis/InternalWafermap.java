@@ -26,20 +26,32 @@ public class InternalWafermap {
 	};
 	private final DIE[][] wafermap;
 
-	public InternalWafermap(TH01WaferMap th01Wafermap, Die[] refdies) throws Th01Exception, InvalidWafermapException, InvalidRefdieException {
-		wafermap = new DIE[th01Wafermap.getNumberOfRows()][th01Wafermap.getNumberOfColumns()];
-		initMap(th01Wafermap, refdies);
+    public final int rows;
+    public final int cols;
+
+    public InternalWafermap(TH01WaferMap th01Wafermap, Die[] refdies) throws Th01Exception, InvalidWafermapException, InvalidRefdieException {
+        // Calculate our own max rows and columns
+        // as our internal representation is not
+        // dependant of the orientation.
+        rows = th01Wafermap.getMaxY() - th01Wafermap.getMinY() + 1;
+        cols = th01Wafermap.getMaxX() - th01Wafermap.getMinX() + 1;
+		wafermap = new DIE[rows][cols];
+		initMap(th01Wafermap, refdies, rows, cols);
 	}
 
 	protected InternalWafermap(DIE[][] wafermap) {
 		this.wafermap = wafermap;
+        rows = wafermap.length;
+        cols = (wafermap.length > 0)? wafermap[0].length : 0;
 	}
 
-	private void initMap(TH01WaferMap th01Wafermap, Die[] refdies) throws Th01Exception, InvalidWafermapException, InvalidRefdieException {
-		for (int y = 0; y < th01Wafermap.getNumberOfRows(); y++) {
-			this.wafermap[y] = new DIE[th01Wafermap.getNumberOfColumns()];
-			for (int x = 0; x < th01Wafermap.getNumberOfColumns(); x++) {
-				this.wafermap[y][x] = DIE.NONE;
+	private void initMap(TH01WaferMap th01Wafermap, Die[] refdies, final int rows, final int cols)
+            throws Th01Exception, InvalidWafermapException, InvalidRefdieException {
+
+		for (int y = 0; y < rows; y++) {
+			wafermap[y] = new DIE[cols];
+			for (int x = 0; x < cols; x++) {
+				wafermap[y][x] = DIE.NONE;
 			}
 		}
 
@@ -47,7 +59,7 @@ public class InternalWafermap {
 			Die id = null;
 			try {
 				id = new Die.Builder(d).setTh01Wafermap(th01Wafermap).build().toInternal();
-				wafermap[id.getY()][id.getX()] = dieresult(th01Wafermap, d.getBincode());
+                wafermap[id.getY()][id.getX()] = dieresult(th01Wafermap, d.getBincode());
 			} catch (ArrayIndexOutOfBoundsException e) {
 				throw new InvalidWafermapException(String.format("The wafermap contains a die %s which is outside the wafermap.", id));
 			}
@@ -87,6 +99,9 @@ public class InternalWafermap {
 			StringBuffer l = new StringBuffer();
 			for (DIE d : line) {
 				char die;
+                if (d == null) {
+                    die = none;
+                } else {
 				switch (d) {
 					case PASS:
 						die = pass;
@@ -100,6 +115,7 @@ public class InternalWafermap {
 					default:
 						die = none;
 				}
+                }
 				l.append(die);
 			}
 			b.append(l).append('\n');
@@ -116,7 +132,11 @@ public class InternalWafermap {
 
 		for (DIE[] line : wafermap) {
 			for (DIE d : line) {
-				map.put(d, map.get(d) + 1);
+                if (d == null) {
+                    map.put(DIE.NONE, map.get(DIE.NONE) + 1);
+                } else {
+				    map.put(d, map.get(d) + 1);
+                }
 			}
 		}
 		return map;

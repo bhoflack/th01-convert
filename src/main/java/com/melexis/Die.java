@@ -81,9 +81,13 @@ public class Die {
 		if (th01Wafermap == null) {
 			throw new AssertionError("Can not convert a die to internal without the wafermap filled in!");
 		}
-		int ix = th01Wafermap.getMaxX() - this.x;
-		int iy = this.y - th01Wafermap.getMinY();
-		return new Builder(ix, iy).setTh01Wafermap(th01Wafermap).build();
+        final int maxX = th01Wafermap.getMaxX();
+        final int maxY = th01Wafermap.getMinY();
+
+        int ix = maxX - x;
+        int iy = y - maxY;
+
+        return new Builder(ix, iy).setTh01Wafermap(th01Wafermap).build();
 	}
 
 	@Override
