@@ -61,7 +61,11 @@ public class InternalWafermap {
 				id = new Die.Builder(d).setTh01Wafermap(th01Wafermap).build().toInternal();
                 wafermap[id.getY()][id.getX()] = dieresult(th01Wafermap, d.getBincode());
 			} catch (ArrayIndexOutOfBoundsException e) {
-				throw new InvalidWafermapException(String.format("The wafermap contains a die %s which is outside the wafermap.", id));
+				throw new InvalidWafermapException(String.format(
+                        "The wafermap contains a die %s which is outside the wafermap. " +
+                                "Regions for x: [%d,%d] y: [%d,%d]."
+                        , d, th01Wafermap.getMinX(), th01Wafermap.getMaxX()
+                        , th01Wafermap.getMinY(), th01Wafermap.getMaxY()));
 			}
 		}
 		for (Die refdie : refdies) {
