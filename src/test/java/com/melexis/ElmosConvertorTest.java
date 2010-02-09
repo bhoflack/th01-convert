@@ -3,9 +3,9 @@ package com.melexis;
 import com.melexis.th01.TH01WaferMap;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.Map;
-import static com.google.common.collect.ImmutableMap.*;
+
+import static com.google.common.collect.ImmutableMap.of;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -18,9 +18,7 @@ import static org.junit.Assert.assertEquals;
 public class ElmosConvertorTest extends AbstractTestUtils {
 
     private final static Map<String, Die[]> EXAMPLES = 
-            of(
-//                "A99394-25-A0", new Die[] {},
-                "A99394-12-A0", new Die[] {});
+            of("A99394-25-A0", new Die[] {});
 
     @Test
     public void testConvert() throws Exception {
