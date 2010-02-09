@@ -7,9 +7,12 @@ package com.melexis;
 import com.melexis.th01.TH01Die;
 import com.melexis.th01.TH01WaferMap;
 import com.melexis.th01.exception.Th01Exception;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
+import static java.lang.String.format;
 
 /**
  *
@@ -74,7 +77,8 @@ public class InternalWafermap {
 				r = new Die.Builder(refdie).setTh01Wafermap(th01Wafermap).build().toInternalRefdie();
 				wafermap[r.getY()][r.getX()] = DIE.REFDIE;
 			} catch (ArrayIndexOutOfBoundsException e) {
-				System.out.println(String.format("Wafermap boundaries x: %s %s y: %s %s", th01Wafermap.getMinX(), th01Wafermap.getMaxX(), th01Wafermap.getMinY(), th01Wafermap.getMaxY()));
+				System.out.println(format("Wafermap boundaries x: %s %s y: %s %s", th01Wafermap.getMinX(), th01Wafermap.getMaxX(), th01Wafermap.getMinY(), th01Wafermap.getMaxY()));
+                System.out.println(format("Die %s", r));
 				throw new InvalidRefdieException(String.format("The coordinates of refdie %s are outside the wafermap.  Please correct!", refdie));
 			}
 		}

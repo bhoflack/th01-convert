@@ -8,6 +8,8 @@ import com.melexis.th01.TH01Die;
 import com.melexis.th01.TH01WaferMap;
 import com.melexis.th01.exception.Th01Exception;
 
+import static java.lang.Math.abs;
+
 /**
  *
  * @author brh
@@ -65,8 +67,16 @@ public class Die {
 		if (th01Wafermap == null) {
 			throw new AssertionError("Can not convert a die to internal without the wafermap filled in!");
 		}
-		int ix = th01Wafermap.getNumberOfColumns() + x - 1;
-		int iy = th01Wafermap.getNumberOfRows() + y - 1;
+
+        int ix, iy;
+
+        if (th01Wafermap.getFlat().equals('E')) {
+            ix = x - th01Wafermap.getMinX() - 1;
+            iy = th01Wafermap.getMaxY() - y;
+        } else {
+		    ix = th01Wafermap.getNumberOfColumns() + x - 1;
+		    iy = th01Wafermap.getNumberOfRows() + y - 1;
+        }
 
 		return new Builder(ix, iy).setTh01Wafermap(th01Wafermap).build();
 	}
@@ -84,8 +94,8 @@ public class Die {
         final int maxX = th01Wafermap.getMaxX();
         final int maxY = th01Wafermap.getMinY();
 
-        int ix = maxX - x;
-        int iy = y - maxY;
+        int ix = abs(maxX - x);
+        int iy = abs(y - maxY);
 
         return new Builder(ix, iy).setTh01Wafermap(th01Wafermap).build();
 	}

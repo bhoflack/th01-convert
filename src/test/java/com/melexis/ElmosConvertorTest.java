@@ -17,7 +17,10 @@ import static org.junit.Assert.assertEquals;
  */
 public class ElmosConvertorTest extends AbstractTestUtils {
 
-    private final static Map<String, Die[]> EXAMPLES = of("A99394-25-A0", new Die[] {});
+    private final static Map<String, Die[]> EXAMPLES = 
+            of(
+//                "A99394-25-A0", new Die[] {},
+                "A99394-12-A0", new Die[] {});
 
     @Test
     public void testConvert() throws Exception {

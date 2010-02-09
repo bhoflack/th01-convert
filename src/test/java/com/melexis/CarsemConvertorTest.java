@@ -6,12 +6,13 @@ package com.melexis;
 
 import com.melexis.th01.TH01WaferMap;
 import com.melexis.th01.exception.Th01Exception;
+import org.junit.Test;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  *
@@ -22,14 +23,8 @@ public class CarsemConvertorTest extends AbstractTestUtils {
 	private final static Map<String, Die[]> EXAMPLES = new HashMap<String, Die[]>() {
 
 		{
-			put("B79929-25-F1", new Die[]{
-					new Die.Builder(-7, -28).build(),
-					new Die.Builder(-33, -7).build()
-				});
-			put("T26655-01-F5", new Die[]{
-					new Die.Builder(-18, -17).build(),
-					new Die.Builder(-19, -20).build()
-				});
+			put("B79929-25-F1", new Die[]{new Die.Builder(-7, -28).build(), new Die.Builder(-33, -7).build()});
+			put("T26655-01-F5", new Die[]{new Die.Builder(-18, -17).build(), new Die.Builder(-19, -20).build()});
             put("A99394-25-A0", new Die[]{});
 			put("B79929-25-F1", new Die[]{new Die.Builder(-7, -28).build(), new Die.Builder(-33, -7).build()});
 			put("B79929-24-C6", new Die[]{new Die.Builder(-7, -28).build(), new Die.Builder(-33, -7).build()});
@@ -129,12 +124,14 @@ public class CarsemConvertorTest extends AbstractTestUtils {
 			put("T26892-18-G0", new Die[]{new Die.Builder(-18, -17).build(), new Die.Builder(-19, -20).build()});
 			put("T26892-17-D5", new Die[]{new Die.Builder(-18, -17).build(), new Die.Builder(-19, -20).build()});
 			put("T26892-16-B2", new Die[]{new Die.Builder(-18, -17).build(), new Die.Builder(-19, -20).build()});
+            put("B81025-13-A0", new Die[]{new Die.Builder(10, 35).build(), new Die.Builder(-16,9).build()});
 		}
 	};
 
 	@Test
 	public void testConvert() throws IOException, Th01Exception, InvalidRefdieException, InvalidWafermapException, Exception {
 		for (String example : EXAMPLES.keySet()) {
+            System.out.print(example);
 			String thmap = String.format("carsem_%s.th01", example);
 			String output = String.format("carsem_%s.example", example);
 

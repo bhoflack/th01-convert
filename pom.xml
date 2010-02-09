@@ -5,7 +5,7 @@
     <groupId>com.melexis</groupId>
     <artifactId>th01-convert</artifactId>
     <packaging>jar</packaging>
-    <version>1.2-3</version>
+    <version>1.2-4</version>
     <name>th01-convert</name>
     <url>http://maven.apache.org</url>
     <build>

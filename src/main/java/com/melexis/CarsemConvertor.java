@@ -49,7 +49,7 @@ public class CarsemConvertor extends AbstractConvertor implements Convertor {
 		VelocityContext context = super.getContext();
 
         int orient;
-        if (super.th01Wafermap.getFlat().equals('O')) {
+        if (super.th01Wafermap.getFlat().equals('O') || super.th01Wafermap.getFlat().equals('E')) {
             orient = 3;
         } else {
             orient = 6;

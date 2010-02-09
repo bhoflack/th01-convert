@@ -7,10 +7,12 @@ package com.melexis;
 
 import com.melexis.th01.TH01WaferMap;
 import com.melexis.th01.exception.Th01Exception;
-import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import java.io.IOException;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  *
@@ -19,10 +21,12 @@ import static org.junit.Assert.*;
 public class DieTest extends AbstractTestUtils {
 
 	private TH01WaferMap wafermap;
+    private TH01WaferMap b81025;
 
 	@Before
 	public void setUp() throws IOException {
 		wafermap = new TH01WaferMap(readFileFromResource("carsem_B79929-25-F1.th01"));
+        b81025 = new TH01WaferMap(readFileFromResource("carsem_B81025-13-A0.th01"));
 	}
 
 	@Test
