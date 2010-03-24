@@ -19,8 +19,8 @@ public class CarsemConvertor extends AbstractConvertor implements Convertor {
 	private final String waferid;
 
 	public CarsemConvertor(TH01WaferMap th01Wafermap, Die[] refdies, String waferid)
-		throws Th01Exception, Exception {
-		super(th01Wafermap, refdies);
+		throws Exception {
+		super(new SimpleConvertStrategy('1', '0', '.', 'T'), th01Wafermap, refdies);
 		this.waferid = waferid;
 	}
 

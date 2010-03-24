@@ -38,7 +38,7 @@ public class ElmosAPConvertor extends AbstractConvertor implements Convertor {
 	};
 
 	public ElmosAPConvertor(Builder b) throws Th01Exception, Exception {
-		super(b.th01Wafermap, b.refdies);
+		super(new SimpleConvertStrategy(PASS, FAIL, NONE, REFDIE), b.th01Wafermap, b.refdies);
 	}
 
 	@Override

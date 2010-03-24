@@ -6,12 +6,13 @@ package com.melexis;
 
 import com.melexis.th01.TH01WaferMap;
 import com.melexis.th01.exception.Th01Exception;
+import org.apache.velocity.VelocityContext;
+
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.velocity.VelocityContext;
 
 /**
  *
@@ -30,7 +31,7 @@ public class MPDConvertor extends AbstractConvertor implements Convertor {
 	};
 
 	public MPDConvertor(TH01WaferMap th01Wafermap, Die[] refdies) throws Th01Exception, Exception {
-		super(th01Wafermap, refdies);
+		super(new SimpleConvertStrategy('1', '0', '#', 'T'), th01Wafermap, refdies);
 	}
 
 	@Override

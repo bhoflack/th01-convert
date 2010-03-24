@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
  *
  * @author brh
  */
-public class DieTest extends AbstractTestUtils {
+public class DieTest extends TestUtils {
 
 	private TH01WaferMap wafermap;
     private TH01WaferMap b81025;

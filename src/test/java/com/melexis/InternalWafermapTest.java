@@ -7,6 +7,7 @@ package com.melexis;
 import org.junit.Before;
 import org.junit.Test;
 
+import static java.util.EnumSet.of;
 import static org.junit.Assert.*;
 
 /**
@@ -18,10 +19,15 @@ public class InternalWafermapTest {
 	class DummyInternal extends InternalWafermap {
 
 		public DummyInternal() {
-			super(new DIE[][]{new DIE[]{DIE.NONE, DIE.PASS, DIE.PASS},
-					new DIE[]{DIE.REFDIE, DIE.REFDIE, DIE.FAIL}});
+			super(null, new SimpleConvertStrategy('P', 'F', 'N', 'R'), new InternalDie[][]{
+                    new InternalDie[] {new InternalDie(null, of(DieStatus.NONE)),
+                            new InternalDie(1, of(DieStatus.PASS)),
+                            new InternalDie(1, of(DieStatus.PASS))},
+                    new InternalDie[] {new InternalDie(1, of(DieStatus.REFDIE)),
+                            new InternalDie(3, of(DieStatus.REFDIE)),
+                            new InternalDie(16, of(DieStatus.FAIL))}}, Flat.NORTH);
 		}
-	}
+    }
 
 	private DummyInternal internal;
 
@@ -35,24 +41,34 @@ public class InternalWafermapTest {
 		InternalWafermap w = internal.rotate90Degrees();
 		
 		assertFalse("The wafermaps should not be equal" , w.equals(internal));
-		assertEquals("RN\nRP\nFP", w.convert('P', 'F', 'N', 'R').trim());
+		assertEquals("RN\nRP\nFP", w.convert().trim());
 	}
 
 	@Test
 	public void testRotate180Degrees() {
 		InternalWafermap w = internal.rotate90Degrees().rotate90Degrees();
 		
-		assertEquals("FRR\nPPN", w.convert('P', 'F', 'N', 'R').trim());
+		assertEquals("FRR\nPPN", w.convert().trim());
 	}
 
+    @Test
+    public void testRotateSouth() {
+        final InternalWafermap w = internal.rotateSouth();
+
+        assertEquals("FRR\nPPN", w.convert().trim());
+    }
+
+    @Test
 	public void testGetTotalDies() {
 		assertEquals(new Integer(5), internal.getTotalDies());
 	}
 
-	public void testGetTestedDies() {
+	@Test
+    public void testGetTestedDies() {
 		assertEquals(new Integer(3), internal.getTestedDies());
 	}
 
+    @Test
 	public void testGetPassedDies() {
 		assertEquals(new Integer(2), internal.getPassedDies());
 	}

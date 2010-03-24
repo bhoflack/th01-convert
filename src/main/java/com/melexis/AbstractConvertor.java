@@ -25,15 +25,17 @@ public abstract class AbstractConvertor {
 	public final TH01WaferMap th01Wafermap;
 	public final InternalWafermap internalWafermap;
 
-	public AbstractConvertor(TH01WaferMap th01Wafermap, Die[] refdies) throws Th01Exception, InvalidWafermapException, InvalidRefdieException {
-		this.th01Wafermap = th01Wafermap;
-		this.internalWafermap = new InternalWafermap(th01Wafermap, refdies);
+	public AbstractConvertor(final ConvertStrategy _convertstrategy,
+                             final TH01WaferMap _th01Wafermap,
+                             final Die[] _refdies) throws Th01Exception, InvalidWafermapException, InvalidRefdieException {
+		th01Wafermap = _th01Wafermap;
+		internalWafermap = new InternalWafermap(_convertstrategy, _th01Wafermap, _refdies);
 	}
 
 	protected String convertWafermap() throws Th01Exception, InvalidWafermapException, InvalidRefdieException {
 		// rotate 180 degrees
 		InternalWafermap i = internalWafermap.rotate90Degrees().rotate90Degrees();
-		return i.convert(getPassSymbol(), getFailSymbol(), getNoneSymbol(), getRefdieSymbol());
+		return i.convert();
 	}
 
 	public byte[] convert() throws Exception {

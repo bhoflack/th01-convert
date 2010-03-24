@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
  *
  * @author brh
  */
-public class CarsemConvertorTest extends AbstractTestUtils {
+public class CarsemConvertorTest extends TestUtils {
 
 	private final static Map<String, Die[]> EXAMPLES = new HashMap<String, Die[]>() {
 
@@ -125,6 +125,7 @@ public class CarsemConvertorTest extends AbstractTestUtils {
 			put("T26892-17-D5", new Die[]{new Die.Builder(-18, -17).build(), new Die.Builder(-19, -20).build()});
 			put("T26892-16-B2", new Die[]{new Die.Builder(-18, -17).build(), new Die.Builder(-19, -20).build()});
             put("B81025-13-A0", new Die[]{new Die.Builder(10, 35).build(), new Die.Builder(-16,9).build()});
+            put("B81025-2", new Die[]{new Die.Builder(10, 35).build(), new Die.Builder(-16,9).build()});            
 		}
 	};
 

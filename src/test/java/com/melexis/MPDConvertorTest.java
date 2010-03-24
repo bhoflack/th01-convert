@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
  *
  * @author brh
  */
-public class MPDConvertorTest extends AbstractTestUtils {
+public class MPDConvertorTest extends TestUtils {
 
 	private TH01WaferMap wafermap;
 	private MPDConvertor mpdc;

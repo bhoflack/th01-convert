@@ -15,19 +15,19 @@ import java.io.InputStream;
  *
  * @author brh
  */
-public class AbstractTestUtils {
+public class TestUtils {
 
-	public AbstractTestUtils() {
+	public TestUtils() {
 	}
 
-	protected byte[] readFileFromResource(String name) throws IOException {
-		InputStream is = getClass().getClassLoader().getResourceAsStream(name);
+    protected static byte[] readFileFromResource(String name) throws IOException {
+		InputStream is = TestUtils.class.getClassLoader().getResourceAsStream(name);
 		byte[] buf = new byte[is.available()];
 		is.read(buf);
 		return buf;
 	}
 
-	protected void toFile(byte[] data) throws FileNotFoundException, IOException {
+	protected static void toFile(byte[] data) throws FileNotFoundException, IOException {
 		File f = File.createTempFile("wafermap", "mpd");
 		f.createNewFile();
 		FileOutputStream fos = new FileOutputStream(f);
