@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
  * Time: 9:29:20 AM
  * To change this template use File | Settings | File Templates.
  */
-public class RtwmConvertorTest extends TestUtils {
+public class RtwmConvertorTest extends Utils {
 
     private RtwmConvertor rtwmConvertor;
 

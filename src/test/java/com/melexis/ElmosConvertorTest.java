@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
  * Time: 1:46:24 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ElmosConvertorTest extends TestUtils {
+public class ElmosConvertorTest extends Utils {
 
     private final static Map<String, Die[]> EXAMPLES = 
             of("A99394-25-A0", new Die[] {});

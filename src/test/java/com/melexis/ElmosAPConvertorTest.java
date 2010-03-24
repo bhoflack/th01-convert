@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  *
  * @author brh
  */
-public class ElmosAPConvertorTest extends TestUtils {
+public class ElmosAPConvertorTest extends Utils {
 
 	private TH01WaferMap wafermap;
 

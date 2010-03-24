@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
  *
  * @author brh
  */
-public class CarsemConvertorTest extends TestUtils {
+public class CarsemConvertorTest extends Utils {
 
 	private final static Map<String, Die[]> EXAMPLES = new HashMap<String, Die[]>() {
 
