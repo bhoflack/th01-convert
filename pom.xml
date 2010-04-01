@@ -11,22 +11,8 @@
 
      <!-- Example for GIT -->
     <scm>
-        <connection>scm:git:ssh://git@github.com:bhoflack/th01-convert.git</connection>
+        <connection>scm:git:ssh://git@github.com/bhoflack/th01-convert.git</connection>
     </scm>
-
-    <distributionManagement>
-	  <repository>
-	    <id>nexus</id>
-	    <name>Internal Releases</name>
-	    <url>http://nexus.colo.elex.be:8081/nexus/content/repositories/releases</url>
-	  </repository>
-	  <!-- use the following if you ARE using a snapshot version. -->
-	  <snapshotRepository>
-	    <id>nexus</id>
-	    <name>Internal Snapshots</name>
-	    <url>http://nexus.colo.elex.be:8081/nexus/content/repositories/snapshots</url>
-	  </snapshotRepository>
-	</distributionManagement>
 
     <build>
         <plugins>
